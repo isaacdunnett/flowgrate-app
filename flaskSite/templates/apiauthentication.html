@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="static/newmondayflowlogoWhitePerim.ico"/>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/apiauthStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400%26display=swap" rel="stylesheet">
+    <title>mondayflow | Authentication</title>
+  </head>
+  <body>
+    <div id="mySidenav" class="sidenav">
+      <a href="/">Home</a>
+      <a href="/develop">Create From Scratch</a>
+      <a href="/mondayhelp">Monday.com Help</a>
+      <hr id="lineInSidenav"/>
+      <a href="/apiauthentication">Create My Workflow →</a>
+    </div>
+    <div id="main">
+      <div class="circle" id="navBarBtn" onmouseover="changeArrowColor()" onmouseout="resetArrowColor()">
+        <div class="boxForCorner">
+            <span id="arrow"></span>
+        </div>
+      </div>
+      <div class="form-container">
+        <form method="POST" class="authForm" action="{{ url_for('actualApp') }}">
+          <p class="tokenLabel">API V2 Token</p>
+          <p class="tokenSubLabel">Here you can try building your api code live with your real account data.</p>
+          <div class="inptField">
+            <input type="text" name="apiV2Token" value="" class="authInputField" placeholder="myapiv2token"/>
+          </div>
+          <input type=submit value="Use this API Token" class="sbmtBtn">
+        </form>
+      </div>
+    </div>
+
+    <script>
+    document.getElementById("navBarBtn").addEventListener("click", open_close);
+
+    var menuState = 0 // close
+    function open_close() {
+      if(menuState === 0){
+         menuState = 1;
+         document.getElementById("mySidenav").style.width = "250px";
+         document.getElementById("main").style.marginLeft = "228px";
+         document.getElementById("navBarBtn").style.marginLeft = "-7px";
+         document.getElementById("arrow").style.borderTop = "1px solid";
+         document.getElementById("arrow").style.borderRight = "1px solid";
+         document.getElementById("arrow").style.borderBottom = "none";
+         document.getElementById("arrow").style.borderLeft = "none";
+         document.getElementById("lineInSidenav").style.transition = "1.8s";
+         document.getElementById("lineInSidenav").style.border = "1px solid white";
+      }
+      else {
+         menuState = 0;
+         document.getElementById("mySidenav").style.width = "25px";
+         document.getElementById("main").style.marginLeft = "0";
+         document.getElementById("navBarBtn").style.marginLeft = "-3px";
+         document.getElementById("arrow").style.borderTop = "none";
+         document.getElementById("arrow").style.borderRight = "none";
+         document.getElementById("arrow").style.borderBottom = "1px solid";
+         document.getElementById("arrow").style.borderLeft = "1px solid";
+         document.getElementById("lineInSidenav").style.transition = "0s";
+         document.getElementById("lineInSidenav").style.border = "1px solid #202225";
+      }
+    }
+
+    function changeArrowColor(){
+        if(menuState === 0){
+            document.getElementById("arrow").style.borderBottom = "1px solid white";
+            document.getElementById("arrow").style.borderLeft = "1px solid white";
+            // document.getElementById("navBarBtn").style.width = "35px";
+        }
+        else{
+            document.getElementById("arrow").style.borderTop = "1px solid white";
+            document.getElementById("arrow").style.borderRight = "1px solid white" ;
+            // document.getElementById("navBarBtn").style.width = "25px";
+        }
+    }
+
+    function resetArrowColor(){
+        if(menuState === 0){
+            document.getElementById("arrow").style.borderBottom = "1px solid black";
+            document.getElementById("arrow").style.borderLeft = "1px solid black";
+            // document.getElementById("navBarBtn").style.width = "35px";
+        }
+        else{
+            document.getElementById("arrow").style.borderTop = "1px solid black";
+            document.getElementById("arrow").style.borderRight = "1px solid black" ;
+            // document.getElementById("navBarBtn").style.width = "35px";
+        }
+    }
+
+
+
+    </script>
+  </body>
+</html>

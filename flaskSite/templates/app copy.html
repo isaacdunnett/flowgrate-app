@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="static/newmondayflowlogoWhitePerim.ico"/>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/apiauthStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400%26display=swap" rel="stylesheet">
+    <title>mondayflow</title>
+  </head>
+  <body>
+
+    <div id="mySidenav" class="sidenav" style="width:250px;">
+      <a href="/">Home</a>
+      <a href="/develop">Create From Scratch</a>
+      <a href="/mondayhelp">Monday.com Help</a>
+      <hr id="lineInSidenav" style="transition:1.8s; border: 1px solid white;"/>
+      <a href="/apiauthentication">Change My API Token</a>
+      <form class="boardSelectForm" method="post" action="{{ url_for('actualApp') }}">
+        <input type="text" name="apiV2Token" value="{{ apiKey }}" style="display:none;"/>
+        <p class="tokenLabel">Choose Your Board</p>
+        <p class="tokenSubLabel">Please select the board you'd like to start with</p>
+        <select name=boardNames class="boardNameSelect">
+          {% for obj in boardNamesAndIds %}
+            {% if boardId == obj.id %}
+              <option value="{{ obj.id }}" selected>{{ obj.name }}</option>
+            {% else %}
+              <option value="{{ obj.id }}">{{ obj.name }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+        <div class="boardIDInputContainer">
+          <div id="boardIDInputSub1">
+              <p id="boardSelectSubLabel">Don't see your board? Input the board ID here.</p>
+          </div>
+          <div id="boardIDInputSub2">
+              <input type="text" name="boardID" value="" id="boardIDInput">
+          </div>
+        </div>
+        <button type="submit" name="sbmt" class="sbmtBtn chooseBoardBtn">&nbsp;&nbsp;Go&nbsp;&nbsp;</button>
+      </form>
+    </div>
+
+    <div id="main" style="margin-left:228px;">
+      <div class="circle" id="navBarBtn" onmouseover="changeArrowColor()" onmouseout="resetArrowColor()" style="margin-left:-7px;">
+        <div class="boxForCorner">
+            <span id="arrow" style="border-top:1px solid; border-right:1px solid; border-bottom:none; border-left:none"></span>
+        </div>
+      </div>
+      <h1 style="color:white; margin-left:70px;margin-bottom:0px;">{{ boardName }}</h1>
+      <p style="color:white; margin-left:70px;margin-top:0px; font-size:15px;">Board ID: {{ boardId }}</p>
+      <div id="app"></div>
+    </div>
+
+
+    <style>
+
+      #apiKey{
+        margin-left: 100px;
+        width: 500px;
+      }
+      .container{
+        display: flex;
+        overflow-x: auto;
+        position: absolute;
+        text-align: center;
+        left: 50px;
+        margin: auto;
+      }
+
+      .App {
+
+        display: flex;
+        align-items: center;
+        vertical-align: middle;
+        justify-content: center;
+        white-space: pre-wrap;
+        margin: 10px;
+        overflow-x: scroll;
+      }
+
+      .stages{
+        border-radius: 25px;
+        margin: 10px;
+        width: 150px;
+        padding: 10px;
+        display:flex;
+        transition: transform .2s;
+        text-align: center;
+        color: black;
+      }
+
+      .stages:hover{
+        transform: scale(1.03);
+        cursor: pointer;
+      }
+
+      .arrowParent{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .arrow {
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+
+      }
+
+      .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+      }
+
+    </style>
+    <script src="https://unpkg.com/react@16.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script type="text/babel">
+      class App extends React.Component {
+
+        getArrayOfFull2PartAutomationsText = (data) => {
+          var activityData = data.split('&#34;').join('"');
+          var itemsInData = activityData.split('"');
+          var array = [];
+          for (var m = 0; m < itemsInData.length; m++) {
+            if(itemsInData[m] === "recipe_text"){
+              var newString = itemsInData[m+2];
+              array.push(newString);
+            }
+          }
+
+          var newArray = [];
+          newArray = this.removeDups(array);
+          return this.splitAutomationsInto2Parts(newArray);
+        }
+
+        removeDups = (array) => {
+          let unique = {};
+          array.forEach(function(n) {
+            if(!unique[n]) {
+              unique[n] = true;
+            }
+          });
+          return Object.keys(unique);
+        }
+
+        splitAutomationsInto2Parts = (array) => {
+          var newArray = [];
+          var newArray2 = [];
+          var l = 0;
+
+          for (var i = 0; i < array.length; i++) {
+            var wordsInString = array[i].split(" ");
+            let addToFirstPart = false;
+            let addToSecondPart = false;
+            for (var j = 0; j < wordsInString.length; j++) {
+              if(addToSecondPart == true){
+                newArray[i+1] += wordsInString[j] + " ";
+              }
+              else if(addToFirstPart == true && wordsInString[j][wordsInString[j].length - 1] === ","){
+                let newWord = wordsInString[j].slice(0, wordsInString[j].length-1);
+                newArray[i] += newWord + " ";
+              }
+              else if(addToFirstPart == true){
+                newArray[i] += wordsInString[j] + " ";
+              }
+
+              if(wordsInString[j][wordsInString[j].length - 1] === ","){
+                addToFirstPart = false;
+                addToSecondPart = true;
+                newArray[i+1] = "";
+              }
+
+              if (wordsInString[j] === "When") {
+                addToFirstPart = true;
+                newArray[i] = "";
+              }
+            }
+            newArray2[l] = newArray[i];
+            l++;
+            newArray2[l] = newArray[i+1];
+            l++;
+          }
+          return this.create2DArrayForEachAutomation(newArray2);
+        }
+
+        create2DArrayForEachAutomation = (array) => {
+          var new2DArray = [];
+          var n = 0;
+          var arrayOfStageElements = [];
+          for (var i = 0; i < array.length; i += 2) {
+            var tempArray = [];
+            tempArray[0] = array[i];
+            tempArray[1] = array[i+1];
+            arrayOfStageElements[i] = React.createElement(
+            'div',
+            {
+            className: 'stages',
+            id: 'stage',
+            style:
+              {background: '#00C2A8'}},
+            tempArray[0]);
+            arrayOfStageElements[i+1] = React.createElement(
+            'div',
+            {
+            className: 'stages',
+            id: 'stage',
+            style:
+              {background: '#00C2A8'}},
+            tempArray[1]);
+            // for (var k = 0; k < 2; k++) {
+            //   new2DArray[k] = new Array(2);
+            // }
+            // for (var l = 0; l < new2DArray.length; l++) {
+            //   for (var m = 0; m < 2; m++) {
+            //       new2DArray[l][m] = 0;
+            //   }
+            // }
+            //new2DArray[n][0] = tempArray[0];
+            //new2DArray[n][1] = tempArray[1];
+            //n++;
+          }
+
+          let arrayOfArrays = [];
+          let preArrayOfArrays = [];
+          for (var i = 0; i < arrayOfStageElements.length; i += 2) {
+            var tempArray = [];
+            tempArray[0] = arrayOfStageElements[i];
+            tempArray[1] = React.createElement("div", {className: "arrowParent"}, "", React.createElement('i', {className: 'arrow down'}, ""));
+            tempArray[2] = arrayOfStageElements[i+1];
+            preArrayOfArrays[i] = tempArray;
+            arrayOfArrays[i] = React.createElement("div", {className: "column"}, "", preArrayOfArrays[i]);
+          }
+          // for (var i = 0; i < new2DArray.length; i++) {
+          //   for (var j = 0; j < new2DArray[j].length; i++) {
+          //     arrayOfStageElements[i] = React.createElement(
+          //     'div',
+          //     {
+          //     className: 'stages',
+          //     id: 'stage',
+          //     style:
+          //       {background: (this.state.settings.background)}},
+          //     new2DArray[i][j]);
+          //   }
+          // }
+          return arrayOfArrays;
+        }
+
+        remove = (arr, index) => {
+           arr.splice(index,1);
+           return arr;
+        }
+
+        findNumOfCommonElement = (array1, array2) => {
+          var count = 0;
+          for(let r = 0; r < array1.length; r++) {
+              for(let j = 0; j < array2.length; j++) {
+                  if(array1[r] === array2[j]) {
+                      count++;
+                  }
+              }
+          }
+          return count;
+        }
+
+        mergeFirstPartOfStages = (twoDArray) => {
+          var k = 1;
+          var l = 2;
+          for (var i = 0; i < twoDArray.length-1; i++) {
+            for (var j = k; j < twoDArray.length; j++) {
+              if(twoDArray[i][0] == twoDArray[j][0]){
+                var proceed = true;
+                l = 2;
+                while (proceed) {
+                  if(twoDArray[i][l] != null){
+                    l++;
+                  }
+                  else{
+                    l++;
+                    twoDArray[i][l] = twoDArray[j][1];
+                    //twoDArray = this.remove(twoDArray[j], 2);
+                    //twoDArray = this.remove(twoDArray[j], 1);
+                    twoDArray = this.remove(twoDArray, j);
+                    proceed = false;
+                  }
+                }
+              }
+            }
+            k++;
+          }
+          return twoDArray;
+        }
+        createStageElements = (twoDArray) => {
+          var arrayOfStageElements = [];
+          for (var i = 0; i < twoDArray.length; i++) {
+            arrayOfStageElements[i] = React.createElement(
+            'div',
+            {
+            className: 'stages',
+            id: 'stage',
+            style:
+              {background: 'lightgrey'}},
+            twoDArray[i][0]);
+          }
+          return arrayOfStageElements;
+        }
+
+        render() {
+          var boardStringData = '{{ boardStringData }}';
+          var step1 = this.getArrayOfFull2PartAutomationsText(boardStringData)
+          return (
+            <div className = "container">
+              <div className = "App">
+                  {step1}
+              </div>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<App />, document.getElementById('app'))
+    </script>
+    <script>
+    document.getElementById("navBarBtn").addEventListener("click", open_close);
+
+    var menuState = 1 // open
+    function open_close() {
+      if(menuState === 0){
+         menuState = 1;
+         document.getElementById("mySidenav").style.width = "250px";
+         document.getElementById("main").style.marginLeft = "228px";
+         document.getElementById("navBarBtn").style.marginLeft = "-7px";
+         document.getElementById("arrow").style.borderTop = "1px solid";
+         document.getElementById("arrow").style.borderRight = "1px solid";
+         document.getElementById("arrow").style.borderBottom = "none";
+         document.getElementById("arrow").style.borderLeft = "none";
+         document.getElementById("lineInSidenav").style.transition = "1.8s";
+         document.getElementById("lineInSidenav").style.border = "1px solid white";
+      }
+      else {
+         menuState = 0;
+         document.getElementById("mySidenav").style.width = "25px";
+         document.getElementById("main").style.marginLeft = "0";
+         document.getElementById("navBarBtn").style.marginLeft = "-3px";
+         document.getElementById("arrow").style.borderTop = "none";
+         document.getElementById("arrow").style.borderRight = "none";
+         document.getElementById("arrow").style.borderBottom = "1px solid";
+         document.getElementById("arrow").style.borderLeft = "1px solid";
+         document.getElementById("lineInSidenav").style.transition = "0s";
+         document.getElementById("lineInSidenav").style.border = "1px solid #202225";
+      }
+    }
+
+    function changeArrowColor(){
+        if(menuState === 0){
+            document.getElementById("arrow").style.borderBottom = "1px solid white";
+            document.getElementById("arrow").style.borderLeft = "1px solid white";
+            // document.getElementById("navBarBtn").style.width = "35px";
+        }
+        else{
+            document.getElementById("arrow").style.borderTop = "1px solid white";
+            document.getElementById("arrow").style.borderRight = "1px solid white" ;
+            // document.getElementById("navBarBtn").style.width = "25px";
+        }
+    }
+
+    function resetArrowColor(){
+        if(menuState === 0){
+            document.getElementById("arrow").style.borderBottom = "1px solid black";
+            document.getElementById("arrow").style.borderLeft = "1px solid black";
+            // document.getElementById("navBarBtn").style.width = "35px";
+        }
+        else{
+            document.getElementById("arrow").style.borderTop = "1px solid black";
+            document.getElementById("arrow").style.borderRight = "1px solid black" ;
+            // document.getElementById("navBarBtn").style.width = "35px";
+        }
+    }
+
+    </script>
+  </body>
+</html>

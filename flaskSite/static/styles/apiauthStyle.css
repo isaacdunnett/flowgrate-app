@@ -1,0 +1,111 @@
+.form-container{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
+  padding-top: 200px;
+  margin: auto;
+  display: table;
+}
+
+.authForm{
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 15px;
+  color: lightgrey;
+  display: table-cell;
+  transition: 0.2s;
+  /* white-space:nowrap; */
+  width: 210px;
+}
+
+.authInputField{
+  width: 600px;
+  font-size: 20px;
+}
+
+.boardSelectForm{
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 15px;
+  color: lightgrey;
+  display: block;
+  transition: 0.2s;
+  /* white-space:nowrap; */
+  width: 210px;
+}
+
+.tokenLabel{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.sbmtBtn{
+  margin: 25px;
+  text-decoration:none;
+  background:white;
+  color:black;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 10px;
+  border: 0.5px solid lightgrey;
+  transition: margin-right 0.3s, padding-right 0.3s, color 0.3s;
+  border-radius: 25px;
+  width: auto;
+  position: relative;
+}
+.sbmtBtn:after {
+    position: absolute;
+    left: 82%;
+    top: 30%;
+    bottom: 0;
+    opacity: 0;
+    color:black;
+    transition: color 0.3s;
+}
+.sbmtBtn:hover {
+    background: #FF6400;
+    color:white;
+    border: 0.5px solid #FF6400;
+}
+.sbmtBtn:hover:after{
+    opacity: 1;
+    color:white;
+    transition: opacity 0.3s, color 0.3s;
+}
+
+.boardNameSelect{
+  width: 175px;
+}
+
+#boardSelectSubLabel{
+  font-size: 8px;
+}
+
+#boardIDInput{
+  width: 70px;
+}
+
+.boardIDInputContainer{
+  width:100%;
+  display:flex;
+  float:left;
+  margin:0;
+  /*align-items: center;*/
+  justify-content: center;
+  /*background-color:#292F4C;*/
+}
+
+#boardIDInputSub1{
+    width:45%;
+    text-align:center;
+}
+
+#boardIDInputSub2{
+    width:55%;
+    vertical-align: middle;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+}

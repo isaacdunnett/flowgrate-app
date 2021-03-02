@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="static/newmondayflowlogoWhitePerim.ico"/>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400%26display=swap" rel="stylesheet">
+    <title>mondayflow</title>
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a href="/" style="color:#FF6400;">Home</a>
+  <a href="/develop">Create From Scratch</a>
+  <a href="/mondayhelp">Monday.com Help</a>
+  <hr id="lineInSidenav"/>
+  <a href="/apiauthentication">Create My Workflow →</a>
+</div>
+
+<div id="main">
+  <div class="circle" id="navBarBtn" onmouseover="changeArrowColor()" onmouseout="resetArrowColor()">
+    <div class="boxForCorner">
+        <span id="arrow"></span>
+    </div>
+  </div>
+  <h1 id="title"><img src="static/newmondayflowlogo.png" id="logoImg"/>mondayflow</h1>
+  <div class="section1">
+      <p id="subtitle">Plan or document your monday.com workflows using mondayflow.</p>
+      <a href="/apiauthentication" id="getStartedBtn">Get Started</a>
+      <div class="exampleImgContainer">
+        <img src="static/examplechart.png" style="width: 1000px;"/>
+      </div>
+  </div>
+  <div class="section2">
+      <div id="sub1">
+          <div class="circularImgContainer">
+              <div class="circular--landscape">
+                <img src="static/whiteboardFlow.png"/>
+              </div>
+          </div>
+          <h1 id="section2Title">Purpose</h1>
+          <p id="section2Text">Some boards on Monday.com can get very complicated with a very large workflow and can have over 30 automations. Creating a board like this requires a lot of thought into it before hand. With mondayflow, create flow diagrams for your boards that are easy to understand.</p>
+      </div>
+      <div id="sub2">
+          <div class="circularImgContainer">
+              <div class="circular--landscape">
+                <img src="static/workflowToMonday.png" id="workflowToMondayImg" style="margin-left:0px;margin-top:20px; width:85%;height:auto"/>
+            </div>
+          </div>
+           <h1 id="section2bTitle">Advantages</h1>
+           <ul id="advantageList">
+            <li style="padding-top:0;">creating complex boards are a breeze</li>
+            <li>never forget the workflow of a job</li>
+            <li>easily understand what automations are getting triggered and when</li>
+            <li>track where you are in the process of your workflow</li>
+            <li>easily identify where a mistake has been made</li>
+           </ul>
+      </div>
+  </div>
+  <div class="section3">
+      <div id="sub1">
+          <img src="static/sss.jpeg" id="sssImg"/>
+      </div>
+      <div id="sub2">
+          <h1 id="section3Title">Want help with monday.com?</h1>
+          <p id="section3Text">mondayflow is partnered with <i>Simple Stack Solutions</i> which is a company dedicated to providing support for you and your monday.com. They also design integration solutions that connect your other software applications.</p>
+      </div>
+  </div>
+  <div class="section4">
+      <video width="900" poster="static/thumbnail.png" controls>
+        <source src="static/IntroToSSS.mp4" type="video/mp4">
+      </video>
+  </div>
+  <div class="section5">
+      <iframe src="https://forms.monday.com/forms/embed/e7e937a24a5c102ca7a25e26ff4ad5e5" width="850" height="850" id="form"></iframe>
+  </div>
+</div>
+
+<div class="footer">
+  <p>&#xa9;2020 by mondayflow</p>
+</div>
+
+<script>
+document.getElementById("navBarBtn").addEventListener("click", open_close);
+
+var menuState = 0 // close
+function open_close() {
+  if(menuState === 0){
+     menuState = 1;
+     document.getElementById("mySidenav").style.width = "250px";
+     document.getElementById("main").style.marginLeft = "228px";
+     document.getElementById("navBarBtn").style.marginLeft = "-7px";
+     document.getElementById("arrow").style.borderTop = "1px solid";
+     document.getElementById("arrow").style.borderRight = "1px solid";
+     document.getElementById("arrow").style.borderBottom = "none";
+     document.getElementById("arrow").style.borderLeft = "none";
+     document.getElementById("section2Text").style.width = "400px";
+     document.getElementById("lineInSidenav").style.transition = "1.8s";
+     document.getElementById("lineInSidenav").style.border = "1px solid white";
+  }
+  else {
+     menuState = 0;
+     document.getElementById("mySidenav").style.width = "25px";
+     document.getElementById("main").style.marginLeft = "0";
+     document.getElementById("navBarBtn").style.marginLeft = "-3px";
+     document.getElementById("arrow").style.borderTop = "none";
+     document.getElementById("arrow").style.borderRight = "none";
+     document.getElementById("arrow").style.borderBottom = "1px solid";
+     document.getElementById("arrow").style.borderLeft = "1px solid";
+     document.getElementById("section2Text").style.width = "600px";
+     document.getElementById("lineInSidenav").style.transition = "0s";
+     document.getElementById("lineInSidenav").style.border = "1px solid #202225";
+  }
+}
+
+function changeArrowColor(){
+    if(menuState === 0){
+        document.getElementById("arrow").style.borderBottom = "1px solid white";
+        document.getElementById("arrow").style.borderLeft = "1px solid white";
+        // document.getElementById("navBarBtn").style.width = "35px";
+    }
+    else{
+        document.getElementById("arrow").style.borderTop = "1px solid white";
+        document.getElementById("arrow").style.borderRight = "1px solid white" ;
+        // document.getElementById("navBarBtn").style.width = "25px";
+    }
+}
+
+function resetArrowColor(){
+    if(menuState === 0){
+        document.getElementById("arrow").style.borderBottom = "1px solid black";
+        document.getElementById("arrow").style.borderLeft = "1px solid black";
+        // document.getElementById("navBarBtn").style.width = "35px";
+    }
+    else{
+        document.getElementById("arrow").style.borderTop = "1px solid black";
+        document.getElementById("arrow").style.borderRight = "1px solid black" ;
+        // document.getElementById("navBarBtn").style.width = "35px";
+    }
+}
+
+
+
+</script>
+</body>
+</html>

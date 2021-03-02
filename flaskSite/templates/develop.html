@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="static/newmondayflowlogoWhitePerim.ico"/>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400%26display=swap" rel="stylesheet">
+    <title>mondayflow | Develop</title>
+    <script src="{{ url_for('static',filename='Build/UnityLoader.js') }}"></script>
+    <script>
+      UnityLoader.instantiate("unityContainer", "{{ url_for('static',filename='Build/mondayflow.json') }}");
+    </script>
+</head>
+<body>
+
+    <div id="mySidenav" class="sidenav">
+      <a href="/">Home</a>
+      <a href="/develop" style="color:#FF6400;">Create From Scratch</a>
+      <a href="/mondayhelp">Monday.com Help</a>
+      <hr id="lineInSidenav"/>
+      <a href="/apiauthentication">Create My Workflow →</a>
+    </div>
+
+    <div id="main" style="padding-bottom:100px;">
+      <div class="circle" id="navBarBtn" onmouseover="changeArrowColor()" onmouseout="resetArrowColor()">
+        <div class="boxForCorner">
+            <span id="arrow"></span>
+        </div>
+      </div>
+      <div id="unityContainerWrapper">
+        <div id="unityContainer" style="box-shadow: 5px 5px 56px 0px rgba(255,255,255,0.5);width: 1280px;
+    height: 800px;"></div>
+        <div class="formContainer" id="formContainer">
+            <iframe src="https://forms.monday.com/forms/embed/e7e937a24a5c102ca7a25e26ff4ad5e5" width="850" height="100%" id="form2"></iframe>
+            <span id="closeFormBtn" onclick="hideForm()"></span>
+        </div>
+      </div>
+    </div>
+
+<div class="footer">
+  <p>&#xa9;2020 by mondayflow</p>
+</div>
+
+<script>
+document.getElementById("navBarBtn").addEventListener("click", open_close);
+
+var menuState = 0 // close
+function open_close() {
+  if(menuState === 0){
+     menuState = 1;
+     document.getElementById("mySidenav").style.width = "250px";
+     document.getElementById("main").style.marginLeft = "228px";
+     document.getElementById("navBarBtn").style.marginLeft = "-7px";
+     document.getElementById("arrow").style.borderTop = "1px solid";
+     document.getElementById("arrow").style.borderRight = "1px solid";
+     document.getElementById("arrow").style.borderBottom = "none";
+     document.getElementById("arrow").style.borderLeft = "none";
+     document.getElementById("lineInSidenav").style.transition = "1.8s";
+     document.getElementById("lineInSidenav").style.border = "1px solid white";
+  }
+  else {
+     menuState = 0;
+     document.getElementById("mySidenav").style.width = "25px";
+     document.getElementById("main").style.marginLeft = "0";
+     document.getElementById("navBarBtn").style.marginLeft = "-3px";
+     document.getElementById("arrow").style.borderTop = "none";
+     document.getElementById("arrow").style.borderRight = "none";
+     document.getElementById("arrow").style.borderBottom = "1px solid";
+     document.getElementById("arrow").style.borderLeft = "1px solid";
+     document.getElementById("lineInSidenav").style.transition = "0s";
+     document.getElementById("lineInSidenav").style.border = "1px solid #202225";
+  }
+}
+
+function changeArrowColor(){
+    if(menuState === 0){
+        document.getElementById("arrow").style.borderBottom = "1px solid white";
+        document.getElementById("arrow").style.borderLeft = "1px solid white";
+        // document.getElementById("navBarBtn").style.width = "35px";
+    }
+    else{
+        document.getElementById("arrow").style.borderTop = "1px solid white";
+        document.getElementById("arrow").style.borderRight = "1px solid white" ;
+        // document.getElementById("navBarBtn").style.width = "25px";
+    }
+}
+
+function resetArrowColor(){
+    if(menuState === 0){
+        document.getElementById("arrow").style.borderBottom = "1px solid black";
+        document.getElementById("arrow").style.borderLeft = "1px solid black";
+        // document.getElementById("navBarBtn").style.width = "35px";
+    }
+    else{
+        document.getElementById("arrow").style.borderTop = "1px solid black";
+        document.getElementById("arrow").style.borderRight = "1px solid black" ;
+        // document.getElementById("navBarBtn").style.width = "35px";
+    }
+}
+
+function hideForm(){
+    document.getElementById("formContainer").style.display = "none";
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+"companyName": "SimpleStackSolutions",
+"productName": "mondayflow",
+"productVersion": "3",
+"dataUrl": "mondayflow.data.unityweb",
+"wasmCodeUrl": "mondayflow.wasm.code.unityweb",
+"wasmFrameworkUrl": "mondayflow.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#808080",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.2.19f1"
+}

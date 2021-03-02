@@ -1,0 +1,17 @@
+https://plus.google.com/118158376684384890179
+https://www.integromat.com/cs/integrations
+https://www.integromat.com/en/integrations
+https://www.integromat.com/apple-touch-icon.png
+https://www.integromat.com/favicon-32x32.png
+https://www.integromat.com/favicon-16x16.png
+https://www.integromat.com/site.webmanifest
+https://www.integromat.com/safari-pinned-tab.svg
+https://static.integromat.com/css/cookieconsent.css
+https://static.integromat.com/css/bootstrap4.min.css?v=4.0.0
+https://static.integromat.com/css/fontawesome-all.min.css?v=5.0.0
+https://static.integromat.com/css/bootstrap-datetimepicker.min.css?v=4.17.42
+https://static.integromat.com/css/imt.base.v2.css?b=1599657447
+https://static.integromat.com/css/public.v2.css?b=1599657447
+https://static.integromat.com/css/imt.guide.v2.css?b=1599657447
+https://static.integromat.com/css/imt.formula.v2.css?b=1599657447
+https://www.integromat.com/imt/themes.v2.css

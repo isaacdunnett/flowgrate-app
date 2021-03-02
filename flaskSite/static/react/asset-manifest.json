@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/static/react/css/main.239a5df7.chunk.css",
+    "main.js": "/static/react/js/main.d0704b89.chunk.js",
+    "main.js.map": "/static/react/js/main.d0704b89.chunk.js.map",
+    "runtime-main.js": "/static/react/js/runtime-main.9b2e2526.js",
+    "runtime-main.js.map": "/static/react/js/runtime-main.9b2e2526.js.map",
+    "js/2.94ef301f.chunk.js": "/static/react/js/2.94ef301f.chunk.js",
+    "js/2.94ef301f.chunk.js.map": "/static/react/js/2.94ef301f.chunk.js.map",
+    "../../templates/app.html": "/static/react/../../templates/app.html",
+    "css/main.239a5df7.chunk.css.map": "/static/react/css/main.239a5df7.chunk.css.map",
+    "js/2.94ef301f.chunk.js.LICENSE.txt": "/static/react/js/2.94ef301f.chunk.js.LICENSE.txt",
+    "media/apps_icon.d4132afe.svg": "/static/react/media/apps_icon.d4132afe.svg",
+    "media/automate-logo.png": "/static/react/media/automate-logo.4c19d104.png",
+    "media/clickImg.b57b92cf.svg": "/static/react/media/clickImg.b57b92cf.svg",
+    "media/logo-integromat.png": "/static/react/media/logo-integromat.07c7bc31.png",
+    "media/monday_3_dots_sign.svg": "/static/react/media/monday_3_dots_sign.8fea417f.svg",
+    "media/monday_edit_sign.svg": "/static/react/media/monday_edit_sign.e7994039.svg",
+    "media/monday_paint_bucket.svg": "/static/react/media/monday_paint_bucket.0f12ea01.svg",
+    "media/monday_plus_sign.svg": "/static/react/media/monday_plus_sign.3ae54a69.svg",
+    "media/monday_trash_sign.svg": "/static/react/media/monday_trash_sign.13c7c0eb.svg",
+    "media/monday_x_sign.svg": "/static/react/media/monday_x_sign.ffa34260.svg",
+    "media/prohibition_sign.svg": "/static/react/media/prohibition_sign.81d0b2f5.svg",
+    "media/zapier-logo.png": "/static/react/media/zapier-logo.f70b23b4.png",
+    "precache-manifest.6ef2113b4d7edc514f203d9259c41259.js": "/static/react/precache-manifest.6ef2113b4d7edc514f203d9259c41259.js",
+    "service-worker.js": "/static/react/service-worker.js"
+  },
+  "entrypoints": [
+    "js/runtime-main.9b2e2526.js",
+    "js/2.94ef301f.chunk.js",
+    "css/main.239a5df7.chunk.css",
+    "js/main.d0704b89.chunk.js"
+  ]
+}
